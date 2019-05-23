@@ -2,12 +2,13 @@
  * @Author: https://github.com/18202409203 
  * @Date: 2019-05-23 21:21:49 
  * @Last Modified by: https://github.com/18202409203
- * @Last Modified time: 2019-05-23 22:00:15
+ * @Last Modified time: 2019-05-23 22:28:20
  */
 
 function Clock(option) {
     var canvas = document.getElementById(option.containerId);
     var compass;
+    var layers = option.layers || ['Year', 'Month', 'Day', 'Week', 'Hour', 'Minute', 'Second'];
     var width = canvas.offsetWidth;
     var height = canvas.offsetHeight;
     var center = {
@@ -33,7 +34,15 @@ function Clock(option) {
         var Minute = new MyArray().genArray(60).sliceArray(m).formatter(option.formatterMinute || (d => d)).array();
         var Second = new MyArray().genArray(60).sliceArray(s).formatter(option.formatterSecond || (d => d)).array();
 
-        this.allParams = [Year, Month, Day, Week, Hour, Minute, Second]
+        this.allLayers = {
+            'Year': Year,
+            'Month': Month,
+            'Day': Day,
+            'Week': Week,
+            'Hour': Hour,
+            'Minute': Minute,
+            'Second': Second
+        }
 
         return this;
     }
@@ -42,8 +51,8 @@ function Clock(option) {
         compass && compass.remove();
         compass = document.createElement("div");
         canvas.appendChild(compass);
-        for (let i = 0; i < 7; i++) {
-            paintCircle(i * (option.gap || 50), this.allParams[i]);
+        for (let i = 0, len = layers.length; i < len; i++) {
+            paintCircle(i * (option.gap || 50), this.allLayers[layers[i]]);
         }
     }
 
