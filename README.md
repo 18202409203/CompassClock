@@ -1,6 +1,8 @@
 # CompassClock 罗盘时钟
 
-<img src="Clock.gif">
+<div style="text-align: center;">
+    <img src="Clock.gif">
+</div>
 
 The file offered a function `Clock` with one parameter `option`, its properties is below:  
 在`Clock.js`中，该文件提供一个函数`Clock`, 函数需要传入一个参数`option`, 默认配置如下：
@@ -19,7 +21,8 @@ The file offered a function `Clock` with one parameter `option`, its properties 
         freshTime: 500, // 刷新时间
         currentColor: 'red', // 当前时间的颜色
         rotateText: false, // 文字是否旋转
-        randomColor: true // 是否开启随机颜色
+        randomColor: true, // 是否开启随机颜色
+        layers: ['Year','Month','Day','Week','Hour','Minute','Second'] // 选择需要的层级，并且自定义顺序
     }
 ```
 
@@ -35,7 +38,7 @@ After import `Clock.js`, a "HOW TO USE" example is below:
 在自己的页面引入`Clock.js`后，一个调用的例子如下：
 
 ```js
-    // test Data
+    // assume that you have a <div> with id "canvas"
     var option = {
         containerId: "canvas",
         formatterMonth: d => d,
